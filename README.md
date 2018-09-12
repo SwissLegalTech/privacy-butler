@@ -2,7 +2,7 @@
 A tiny and simple demo app showing the idea behind the challenge for the hackers.
 
 Further info can be found
-[here](https://github.com/SchweizerischeBundesbahnen/legal-hackathon-2018/blob/master/SBB_%20Hackathon%202018_PrivacyButler.pdf).
+[here](https://github.com/SchweizerischeBundesbahnen/legal-hackathon-2018/blob/master/SBB_Hackathon2018_PrivacyButler.pdf).
 
 ## Tiny sample DEMO
 You can see a working demo here:
