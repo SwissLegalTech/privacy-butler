@@ -1,5 +1,18 @@
 package ch.sbb.hackathon.legalhackathonbackend.service;
 
+import ch.sbb.hackathon.legalhackathonbackend.mapper.EntityResponseMapper;
+import ch.sbb.hackathon.legalhackathonbackend.model.ResponseDto;
+import com.google.cloud.language.v1beta2.AnalyzeEntitiesRequest;
+import com.google.cloud.language.v1beta2.AnalyzeEntitiesResponse;
+import com.google.cloud.language.v1beta2.AnalyzeSyntaxRequest;
+import com.google.cloud.language.v1beta2.AnalyzeSyntaxResponse;
+import com.google.cloud.language.v1beta2.Document;
+import com.google.cloud.language.v1beta2.Document.Type;
+import com.google.cloud.language.v1beta2.EncodingType;
+import com.google.cloud.language.v1beta2.LanguageServiceClient;
+import org.springframework.stereotype.Service;
+
+import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Scanner;
@@ -7,23 +20,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
-import javax.validation.constraints.NotNull;
-
-import org.springframework.stereotype.Service;
-
-import com.google.cloud.language.v1beta2.AnalyzeEntitiesRequest;
-import com.google.cloud.language.v1beta2.AnalyzeEntitiesResponse;
-import com.google.cloud.language.v1beta2.Document;
-import com.google.cloud.language.v1beta2.Document.Type;
-import com.google.cloud.language.v1beta2.EncodingType;
-import com.google.cloud.language.v1beta2.LanguageServiceClient;
-
 @Service
-public class DemoService {
+public class ApiService {
     private static final Pattern URL_REGEX = Pattern.compile("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
-    private static final Logger LOGGER = Logger.getLogger(DemoService.class.getSimpleName());
+    private static final Logger LOGGER = Logger.getLogger(ApiService.class.getSimpleName());
 
-    public AnalyzeEntitiesResponse analyze(@NotNull String url, @NotNull Boolean geoTracking) {
+    public ResponseDto analyze(@NotNull String url, @NotNull Boolean geoTracking) {
 
         try (LanguageServiceClient language = LanguageServiceClient.create()) {
             // The text to analyze
@@ -40,28 +42,26 @@ public class DemoService {
                         .build();
             }
 
-            AnalyzeEntitiesRequest request = AnalyzeEntitiesRequest.newBuilder()
-                    .setDocument(doc)
-                    .setEncodingType(EncodingType.UTF16)
-                    .build();
-
-            /*
-            Mehr info: https://cloud.google.com/natural-language/#nl_demo_section
-
-            AnalyzeSyntaxRequest request1 = AnalyzeSyntaxRequest.newBuilder().setDocument(doc).setEncodingType(EncodingType.UTF16).build();
-            language.analyzeSyntax(request1);
-
-            */
+            AnalyzeEntitiesResponse analyzeEntitiesResponse = language
+                    .analyzeEntities(AnalyzeEntitiesRequest.newBuilder()
+                            .setDocument(doc)
+                            .setEncodingType(EncodingType.UTF16)
+                            .build()
+                    );
 
 
+            AnalyzeSyntaxResponse analyzeSyntaxResponse = language
+                    .analyzeSyntax(AnalyzeSyntaxRequest.newBuilder()
+                            .setDocument(doc)
+                            .setEncodingType(EncodingType.UTF16)
+                            .build()
+                    );
 
-
-
-            return language.analyzeEntities(request);
+            return EntityResponseMapper.map(analyzeEntitiesResponse, analyzeSyntaxResponse);
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Error during analyzing", e);
         }
-        return AnalyzeEntitiesResponse.newBuilder().build();
+        return ResponseDto.INVALID();
     }
 
     private String getContent(@NotNull String url) {
