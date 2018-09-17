@@ -1,3 +1,6 @@
+.ipynb_checkpoints/
+*.swp
+
 ### Compiled output ###
 dist
 tmp
@@ -57,3 +60,4 @@ Thumbs.db
 .settings
 .springBeans
 .sts4-cache
+/bin/
