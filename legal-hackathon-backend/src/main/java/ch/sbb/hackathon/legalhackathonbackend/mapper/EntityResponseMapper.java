@@ -44,6 +44,7 @@ public final class EntityResponseMapper {
         List<Token> tokens = analyzeSyntaxResponse.getTokensList().stream().filter(token -> wordstolookfor.contains(token.getText().getContent())).collect(Collectors.toList());
 
         //TODO: Magischer Filter um Negation auszugrenzen
+        // Bug bei http://localhost:8080/demo?url=%27Ihre%20GPS-Daten%20werden%20von%20uns%20an%20s%20weitergeleitet%27
 
 
         for (Token t : tokens) {

@@ -33,6 +33,7 @@ public final class Dataholder {
             add(Pattern.compile("(?i)Positionsbestimmung.*"));
             add(Pattern.compile("(?i)Ortsbestimmung.*"));
             add(Pattern.compile("(?i)Aufenthaltsort.*"));
+            add(Pattern.compile("(?i)Positionsdaten.*"));
         }};
 
         SYNONY_WEITERGABEANDRITTE = new ArrayList<Pattern>() {{
@@ -63,7 +64,7 @@ public final class Dataholder {
 
     public String getCategoryForToken(Token token) {
         Optional<Map.Entry<String, List<Pattern>>> matchinpatterncollection = MAP.entrySet().stream().filter(stringListEntry -> stringListEntry.getValue().stream().filter(pattern -> pattern.matcher(token.getText().getContent()).matches()).findFirst().isPresent()).findFirst();
-        if (matchinpatterncollection.isPresent() == false) {
+        if (!matchinpatterncollection.isPresent()) {
             throw new IllegalStateException("Ein ehemaliger Eintrag wurde nicht mehr gefunden");
         }
         return matchinpatterncollection.get().getKey();
