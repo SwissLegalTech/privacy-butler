@@ -28,6 +28,8 @@ public final class Dataholder {
             add(Pattern.compile("(?i)GPS-Koordinaten"));
             add(Pattern.compile("(?i)GPS-Daten"));
             add(Pattern.compile("(?i).*Koordinaten.*"));
+            add(Pattern.compile("(?i)Google Maps"));
+            add(Pattern.compile("(?i)Maps"));
             add(Pattern.compile("(?i)Standort.*"));
             add(Pattern.compile("(?i)Ortung.*"));
             add(Pattern.compile("(?i)Positionsbestimmung.*"));
