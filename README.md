@@ -39,7 +39,7 @@ You will need to obtain a developer key from the Cloud API console to use our cu
 
 We ran a short machine learning classification experiment using an open dataset of opt-out policies from [usableprivacy.org](https://usableprivacy.org/data/) and the **[Keras.io](https://keras.io)** deep learning environment. The results can be seen in a [Python notebook](https://github.com/SwissLegalTech/privacy-butler/blob/master/ml/keras-test.ipynb) made with Jupyter, in the `ml` subfolder.
 
-The dataset used in the experiment above was one of the ones recommended by [Pribot.org](https://pribot.org/), a project that was a major motivation for our work here. Many thanks to Dr. Harkous and Prof. Aberer for their feedback to our concept during the hackathon.
+The dataset used in the experiment above was one of the ones recommended by [Pribot.org](https://pribot.org/), a project that was a major motivation for our work here. Many thanks to [Dr. Harkous](http://www.hamzaharkous.com/) for feedback to our concept during the hackathon.
 
 We also considered using [IBM Watson](https://www.ibm.com/watson/services/natural-language-understanding/) (see [Fredrik Stenbeck comparison](http://fredrikstenbeck.com/google-natural-language-vs-watson-natural-language-understanding/) - and [OpenNLP at Apache](https://opennlp.apache.org/).
 
