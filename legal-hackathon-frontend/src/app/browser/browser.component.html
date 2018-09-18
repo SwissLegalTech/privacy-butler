@@ -43,8 +43,8 @@
       This site is sharing your personal data with third parties.
     </div>
   </div>
-  <div class="grid-container" *ngIf="percentage">
+  <div class="grid-container" *ngIf="percentage === 0 || percentage">
     <div><img src="../../assets/cyclops.svg"/></div>
-    <div>The text is {{percentage}}% compliant with your profile.</div>
+    <div class="grid-text">The privacy notes are {{percentage}}% compliant with your profile.</div>
   </div>
 </div>
