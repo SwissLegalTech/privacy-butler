@@ -9,6 +9,7 @@ import com.google.cloud.language.v1beta2.Entity;
 import com.google.cloud.language.v1beta2.Token;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -23,11 +24,11 @@ public final class EntityResponseMapper {
 
         List<String> wordstolookfor = new ArrayList<>(new LinkedHashSet<>(Dataholder.INSTANCE().getAllPatterns().stream()
                 .map(pattern -> orderedEntityNames.stream()
+                        .map(s -> Arrays.asList(s.split(" "))).flatMap(List::stream)
                         .filter(s -> pattern.matcher(s).matches())
                         .collect(Collectors.toList()))
                 .flatMap(List::stream)
                 .collect(Collectors.toList())));
-
 
         ResponseDto.ResponseDtoBuilder builder = ResponseDto.builder();
         builder.foundEntities(wordstolookfor);
