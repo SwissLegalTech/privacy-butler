@@ -13,7 +13,6 @@ import com.google.cloud.language.v1beta2.LanguageServiceClient;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
-import java.io.IOException;
 import java.net.URL;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -58,7 +57,7 @@ public class ApiService {
                     );
 
             return EntityResponseMapper.map(analyzeEntitiesResponse, analyzeSyntaxResponse);
-        } catch (IOException e) {
+        } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Error during analyzing", e);
         }
         return ResponseDto.INVALID();

@@ -28,6 +28,8 @@ public final class Dataholder {
             add(Pattern.compile("(?i)GPS-Koordinaten"));
             add(Pattern.compile("(?i)GPS-Daten"));
             add(Pattern.compile("(?i).*Koordinaten.*"));
+            add(Pattern.compile("(?i)Google Maps"));
+            add(Pattern.compile("(?i)Maps"));
             add(Pattern.compile("(?i)Standort.*"));
             add(Pattern.compile("(?i)Ortung.*"));
             add(Pattern.compile("(?i)Positionsbestimmung.*"));
@@ -44,7 +46,8 @@ public final class Dataholder {
 
         SYNONYM_PROFILING = new ArrayList<Pattern>() {{
             add(Pattern.compile("(?i)Personendaten"));
-            add(Pattern.compile("(?i)Google Analytics"));
+            add(Pattern.compile("(?i).*Analytics"));
+            add(Pattern.compile("(?i)Analytics"));
             add(Pattern.compile("(?i)personenbezogen.*"));
             add(Pattern.compile("(?i)kontaktinformationen"));
         }};
@@ -64,7 +67,10 @@ public final class Dataholder {
     }
 
     public String getCategoryForToken(Token token) {
-        Optional<Map.Entry<String, List<Pattern>>> matchinpatterncollection = MAP.entrySet().stream().filter(stringListEntry -> stringListEntry.getValue().stream().filter(pattern -> pattern.matcher(token.getText().getContent()).matches()).findFirst().isPresent()).findFirst();
+        Optional<Map.Entry<String, List<Pattern>>> matchinpatterncollection = MAP.entrySet().stream()
+                .filter(stringListEntry -> stringListEntry.getValue().stream()
+                        .anyMatch(pattern -> pattern.matcher(token.getText().getContent()).matches())).findFirst();
+
         if (!matchinpatterncollection.isPresent()) {
             throw new IllegalStateException("Ein ehemaliger Eintrag wurde nicht mehr gefunden");
         }
