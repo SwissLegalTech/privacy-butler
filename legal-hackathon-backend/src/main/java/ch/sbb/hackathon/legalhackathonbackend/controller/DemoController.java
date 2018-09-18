@@ -19,9 +19,8 @@ public class DemoController {
 
     @GetMapping("/demo")
     public ResponseEntity greeting(
-            @RequestParam(value = "url") String url,
-            @RequestParam(value = "geotracking", required = false) Boolean geotracking) {
-        ResponseDto response = demoService.analyze(url, geotracking);
+            @RequestParam(value = "url") String url) {
+        ResponseDto response = demoService.analyze(url);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

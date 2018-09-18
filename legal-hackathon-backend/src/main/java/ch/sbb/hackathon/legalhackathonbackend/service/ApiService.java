@@ -25,7 +25,7 @@ public class ApiService {
     private static final Pattern URL_REGEX = Pattern.compile("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
     private static final Logger LOGGER = Logger.getLogger(ApiService.class.getSimpleName());
 
-    public ResponseDto analyze(@NotNull String url, @NotNull Boolean geoTracking) {
+    public ResponseDto analyze(@NotNull String url) {
 
         try (LanguageServiceClient language = LanguageServiceClient.create()) {
             // The text to analyze

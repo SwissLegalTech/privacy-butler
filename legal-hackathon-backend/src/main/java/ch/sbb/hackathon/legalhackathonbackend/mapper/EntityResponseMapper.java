@@ -1,13 +1,12 @@
 package ch.sbb.hackathon.legalhackathonbackend.mapper;
 
 import ch.sbb.hackathon.legalhackathonbackend.Data.Dataholder;
+import ch.sbb.hackathon.legalhackathonbackend.Data.TokenTree;
 import ch.sbb.hackathon.legalhackathonbackend.model.ResponseDto;
 import com.google.cloud.language.v1beta2.AnalyzeEntitiesResponse;
 import com.google.cloud.language.v1beta2.AnalyzeSyntaxResponse;
 import com.google.cloud.language.v1beta2.Entity;
 import com.google.cloud.language.v1beta2.Token;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,8 +16,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public final class EntityResponseMapper {
-    private static final Logger LOGGER = LoggerFactory.getLogger(EntityResponseMapper.class);
-
     public static ResponseDto map(AnalyzeEntitiesResponse analyzeEntitiesResponse, AnalyzeSyntaxResponse analyzeSyntaxResponse) {
         List<Entity> entitiesList = analyzeEntitiesResponse.getEntitiesList();
 
@@ -41,14 +38,16 @@ public final class EntityResponseMapper {
 
     private static Map<String, Boolean> classifyPermissions(List<String> wordstolookfor, AnalyzeSyntaxResponse analyzeSyntaxResponse) {
         Map<String, Boolean> map = new HashMap<>();
+
         List<Token> tokens = analyzeSyntaxResponse.getTokensList().stream().filter(token -> wordstolookfor.contains(token.getText().getContent())).collect(Collectors.toList());
-
-        //TODO: Magischer Filter um Negation auszugrenzen
-        // Bug bei http://localhost:8080/demo?url=%27Ihre%20GPS-Daten%20werden%20von%20uns%20an%20s%20weitergeleitet%27
-
+        TokenTree tokenTree = new TokenTree(analyzeSyntaxResponse.getTokensList());
 
         for (Token t : tokens) {
-            map.put(Dataholder.INSTANCE().getCategoryForToken(t), true);
+            String categoryForToken = Dataholder.INSTANCE().getCategoryForToken(t);
+            if (!map.containsKey(categoryForToken)) {
+                boolean islinkedtonegation = tokenTree.islinkedtonegation(t);
+                map.put(categoryForToken, !islinkedtonegation);
+            }
         }
         return map;
     }

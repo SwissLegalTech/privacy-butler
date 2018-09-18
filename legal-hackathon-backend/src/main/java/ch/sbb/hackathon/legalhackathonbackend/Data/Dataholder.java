@@ -34,6 +34,7 @@ public final class Dataholder {
             add(Pattern.compile("(?i)Ortsbestimmung.*"));
             add(Pattern.compile("(?i)Aufenthaltsort.*"));
             add(Pattern.compile("(?i)Positionsdaten.*"));
+            add(Pattern.compile("(?i)Geodaten.*"));
         }};
 
         SYNONY_WEITERGABEANDRITTE = new ArrayList<Pattern>() {{
