@@ -1,0 +1,34 @@
+.url-input {
+  width: 50%;
+}
+
+.result-container {
+  margin-top: 2em;
+  text-align: center;
+}
+
+.bad-result-icon {
+  transform: scale(5);
+  color: red;
+  margin-bottom: 2em;
+}
+
+.button-right {
+  float: right;
+}
+
+.grid-container {
+  width: 50%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 100px 250px;
+}
+
+.grid-text {
+  text-align: left;
+  align-self: center;
+}
+
+.grid-container-percentage {
+
+}

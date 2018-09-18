@@ -1,0 +1,11 @@
+<ul class="unstyled-list">
+  <li><strong>{{title}}</strong></li>
+  <li>
+    <button mat-icon-button [color]="setting ? 'primary':'warn'">
+      <mat-icon>{{setting ? 'thumb_up' : 'thumb_down'}}</mat-icon>
+    </button>
+  </li>
+  <li>
+    {{setting ? "I'm ok with that." : "I'm NOT ok with that!"}}
+  </li>
+</ul>

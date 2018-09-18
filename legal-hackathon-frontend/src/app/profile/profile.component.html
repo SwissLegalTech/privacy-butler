@@ -1,0 +1,35 @@
+<div style="text-align: center">
+
+  <h1>My Profile</h1>
+
+  <table class="center-table">
+    <tr>
+      <td><img src="../../assets/geo.svg"
+               matTooltip="Your location data is used for further purposes by the service provider, e.g. advertisement."
+               matTooltipPosition="above"/></td>
+      <td>
+        <app-row title="Geotracking" [setting]="geo" (click)="geo=!geo"></app-row>
+      </td>
+    </tr>
+    <tr>
+      <td><img src="../../assets/profiling.svg"
+               matTooltip="Your data is used for profiling purposes."
+               matTooltipPosition="above"/></td>
+      <td>
+        <app-row title="Profiling" [setting]="profiling" (click)="profiling=!profiling"></app-row>
+      </td>
+    </tr>
+    <tr>
+      <td><img src="../../assets/data-sharing.svg"
+               matTooltip=" Your data may be shared with third parties."
+               matTooltipPosition="above"/></td>
+      <td>
+        <app-row title="Data sharing" [setting]="dataSharing" (click)="dataSharing=!dataSharing"></app-row>
+      </td>
+    </tr>
+  </table>
+  <h1>I now want to test it</h1>
+  <button mat-icon-button routerLink="/browser">
+    <mat-icon style="transform: scale(4)">laptop_chromebook</mat-icon>
+  </button>
+</div>

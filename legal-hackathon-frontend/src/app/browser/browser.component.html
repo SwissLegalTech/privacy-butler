@@ -1,0 +1,50 @@
+<form (submit)="checkSite()">
+
+  <mat-form-field class="url-input">
+    <input matInput placeholder="Type in your data privacy URL and hit enter or click the button"
+           [(ngModel)]="url" name="url">
+    <button type="button" *ngIf="url"
+            mat-button matSuffix mat-icon-button aria-label="Clear"
+            (click)="url=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <button mat-icon-button class="button-right"
+          routerLink="/profile">
+    <mat-icon>settings</mat-icon>
+  </button>
+  <br>
+  <button mat-raised-button color="primary" [disabled]="isLoading">
+    {{isLoading ? 'Analyzing site content...' : 'Be my butler'}}
+  </button>
+</form>
+<mat-spinner *ngIf="isLoading" style="margin-top: 1em"></mat-spinner>
+<br>
+<div class="result-container">
+  <img *ngIf="allFulfilled()" src="../../assets/excited.svg"/>
+  <mat-icon *ngIf="result && !allFulfilled()" class="bad-result-icon">sentiment_very_dissatisfied</mat-icon>
+  <div class="grid-container">
+    <div *ngIf="result && !geotrackingFulfilled">
+      <img src="../../assets/geo.svg">
+    </div>
+    <div *ngIf="result && !geotrackingFulfilled" class="grid-text">
+      This site is using your GPS data.
+    </div>
+    <div *ngIf="result && !profilingFulfilled">
+      <img src="../../assets/profiling.svg">
+    </div>
+    <div *ngIf="result && !profilingFulfilled" class="grid-text">
+      This site is profiling you.
+    </div>
+    <div *ngIf="result && !datasharingFulfilled">
+      <img src="../../assets/data-sharing.svg">
+    </div>
+    <div *ngIf="result && !datasharingFulfilled" class="grid-text">
+      This site is sharing your personal data with third parties.
+    </div>
+  </div>
+  <div class="grid-container" *ngIf="percentage">
+    <div><img src="../../assets/cyclops.svg"/></div>
+    <div>The text is {{percentage}}% compliant with your profile.</div>
+  </div>
+</div>
