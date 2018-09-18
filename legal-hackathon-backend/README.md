@@ -21,3 +21,5 @@ And then
 ```
 mvn spring-boot:run
 ``` 
+
+Or use IntelliJ IDEA ...
