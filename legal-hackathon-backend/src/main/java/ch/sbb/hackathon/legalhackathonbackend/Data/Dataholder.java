@@ -12,8 +12,11 @@ import java.util.regex.Pattern;
 public final class Dataholder {
     private static Dataholder _instance;
     private final ArrayList<Pattern> SYNONYM_PROFILING;
+    private final ArrayList<Pattern> SYNONYM_DATASTORAGECH;
+    private final ArrayList<Pattern> SYNONYM_DATASTORAGEDE;
+    private final ArrayList<Pattern> SYNONYM_DATASTORAGEUS;
     private final ArrayList<Pattern> SYNONYM_GEOTRACKING;
-    private final ArrayList<Pattern> SYNONY_WEITERGABEANDRITTE;
+    private final ArrayList<Pattern> SYNONYM_WEITERGABEANDRITTE;
     private final Map<String, List<Pattern>> MAP;
 
     public static Dataholder INSTANCE() {
@@ -39,7 +42,7 @@ public final class Dataholder {
             add(Pattern.compile("(?i)Geodaten.*"));
         }};
 
-        SYNONY_WEITERGABEANDRITTE = new ArrayList<Pattern>() {{
+        SYNONYM_WEITERGABEANDRITTE = new ArrayList<Pattern>() {{
             add(Pattern.compile("(?i)Dritt.*"));
             add(Pattern.compile("(?i).*Partner.*"));
         }};
@@ -48,21 +51,48 @@ public final class Dataholder {
             add(Pattern.compile("(?i)Personendaten"));
             add(Pattern.compile("(?i).*Analytics"));
             add(Pattern.compile("(?i)Analytics"));
+            add(Pattern.compile("(?i)Cookies"));
             add(Pattern.compile("(?i)personenbezogen.*"));
+            add(Pattern.compile("(?i)personalisier.*"));
             add(Pattern.compile("(?i)kontaktinformationen"));
+        }};
+        
+        SYNONYM_DATASTORAGECH = new ArrayList<Pattern>() {{
+            add(Pattern.compile("(?i)schweizer Server"));
+            add(Pattern.compile("(?i)ServerStandort Schweiz"));
+            add(Pattern.compile("(?i)Server Standort Schweiz"));
+        }};
+        
+        SYNONYM_DATASTORAGEDE = new ArrayList<Pattern>() {{
+            add(Pattern.compile("(?i)deutschen Server"));
+            add(Pattern.compile("(?i)ServerStandort Deutschland"));
+            add(Pattern.compile("(?i)Server Standort Deutschland"));
+        }};
+        
+        SYNONYM_DATASTORAGEUS = new ArrayList<Pattern>() {{
+            add(Pattern.compile("Swiss-U.S. Privacy Shield"));
+            add(Pattern.compile("Swiss-US-Privacy-Shield"));
+            add(Pattern.compile("privacyshield.gov"));
+            add(Pattern.compile("in den USA"));
         }};
 
         MAP = new HashMap<>();
         MAP.put("geotracking", SYNONYM_GEOTRACKING);
-        MAP.put("dritte", SYNONY_WEITERGABEANDRITTE);
+        MAP.put("dritte", SYNONYM_WEITERGABEANDRITTE);
         MAP.put("profiling", SYNONYM_PROFILING);
+        MAP.put("datastoragech", SYNONYM_DATASTORAGECH);
+        MAP.put("datastoragede", SYNONYM_DATASTORAGEDE);
+        MAP.put("datastorageus", SYNONYM_DATASTORAGEUS);
     }
 
     public List<Pattern> getAllPatterns() {
         List<Pattern> matchedpatterns = new ArrayList<Pattern>();
         matchedpatterns.addAll(SYNONYM_GEOTRACKING);
-        matchedpatterns.addAll(SYNONY_WEITERGABEANDRITTE);
+        matchedpatterns.addAll(SYNONYM_WEITERGABEANDRITTE);
         matchedpatterns.addAll(SYNONYM_PROFILING);
+        matchedpatterns.addAll(SYNONYM_DATASTORAGECH);
+        matchedpatterns.addAll(SYNONYM_DATASTORAGEDE);
+        matchedpatterns.addAll(SYNONYM_DATASTORAGEUS);
         return matchedpatterns;
     }
 
