@@ -1,3 +1,10 @@
-.unset-width {
-  width: unset;
+@import '../variables.scss';
+
+.logo {
+    margin-right: 10px;
+}
+
+.content {
+    background-color: $primary-color;
+    height: 500px;
 }

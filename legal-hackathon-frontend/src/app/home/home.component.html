@@ -1,10 +1,9 @@
-<div style="text-align: center">
-  <h1>Privacy Butler</h1>
-
-  <button mat-icon-button [disableRipple]="true" class="unset-width"
-          routerLink="/profile">
-    <mat-icon class="unset-width">
-      <img src="../../assets/cyclops.svg" style="transform: scale(5); margin-top: 4em"/>
-    </mat-icon>
-  </button>
+<div>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <img src="../../assets/cyclops.svg" width="50px"class="logo" />
+    <h1>Privacy Butler</h1>
+  </div>
+  <main class="content" fxLayoutAlign="center center">
+    <button mat-button [routerLink]="['/profile']" mat-raised-button>Get Started!</button>
+  </main>
 </div>
