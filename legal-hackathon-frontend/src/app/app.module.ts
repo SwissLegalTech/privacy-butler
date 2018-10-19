@@ -19,6 +19,7 @@ import {RowComponent} from './profile/row/row.component';
 import {FormsModule} from '@angular/forms';
 import {BrowserComponent} from './browser/browser.component';
 import {HttpClientModule} from '@angular/common/http';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -48,7 +49,8 @@ const appRoutes: Routes = [
     MatInputModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
