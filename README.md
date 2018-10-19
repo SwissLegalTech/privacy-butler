@@ -51,7 +51,10 @@ Further reading, in no particular order.
 
 - https://pribot.org/
 - https://tosdr.org/
+- https://www.eff.org/privacybadger
 - https://chrome.google.com/webstore/detail/privacycheck/poobeppenopkcbjejfjenbiepifcbclg?hl=en-US
+- https://www.kaspersky.com/transparency-center
+- https://www.privacyshield.gov/Program-Overview
 
 #### Machine learning
 
@@ -61,7 +64,8 @@ Further reading, in no particular order.
 
 #### Policy documentation
 
+- https://backpack.openbadges.org/backpack/welcome
 - https://openscience.adaptcentre.ie/projects/GDPRtEXT/
 - https://www.w3.org/community/dpvcg/
 - https://ebiquity.umbc.edu/resource/html/id/370/Ontology-for-Data-Privacy-Policy
-- http://www.semantic-web-journal.net/content/improving-readability-online-privacy-policies-through-doop-domain-ontology-online-privacy
+- http://www.semantic-web-journal.net/content/improving-readability-online-privacy-policies-through-doop-domain-ontology-online-privacyi
